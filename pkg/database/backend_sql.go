@@ -18,7 +18,7 @@ func PrepareMetricInsert(dbMetrics *sql.DB) (*sql.Stmt) {
 	return stmt;
 }
 
-func insertMetric(stmt *sql.Stmt, result models.ServiceResult, metric models.Metric) {
+func InsertMetric(stmt *sql.Stmt, result models.ServiceResult, metric models.Metric) {
 	fmt.Println("inserting metric", result.Id, "called", metric.Name, "updated", result.Updated);
 
 	_, err := stmt.Exec(result.Updated, result.Id, result.Identifier, metric.Name, metric.Value)
