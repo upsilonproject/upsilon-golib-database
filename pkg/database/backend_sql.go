@@ -3,7 +3,7 @@ package database;
 import (
 	"fmt"
 	"database/sql"
-	"github.com/upsilonproject/upsilon-golib-database/src/models"
+	"github.com/upsilonproject/upsilon-golib-database/pkg/models"
 
 )
 
