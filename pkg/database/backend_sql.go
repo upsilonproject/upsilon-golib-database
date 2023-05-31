@@ -8,7 +8,7 @@ import (
 )
 
 func PrepareMetricInsert(dbMetrics *sql.DB) (*sql.Stmt) {
-	sql := "INSERT INTO metrics (extracted, updated, serviceCheckResultId, serviceIdentifier, name, value) VALUES (now(), ?, ?, ?, ?, ?)";
+	sql := "INSERT INTO service_metrics (extracted, updated, serviceCheckResultId, serviceIdentifier, name, value) VALUES (now(), ?, ?, ?, ?, ?)";
 	stmt, err := dbMetrics.Prepare(sql);
 
 	if (err != nil) {
