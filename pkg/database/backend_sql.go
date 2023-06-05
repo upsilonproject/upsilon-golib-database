@@ -1,7 +1,6 @@
 package database;
 
 import (
-	"fmt"
 	"database/sql"
 	"github.com/upsilonproject/upsilon-golib-database/pkg/models"
 
@@ -19,8 +18,6 @@ func PrepareMetricInsert(dbMetrics *sql.DB) (*sql.Stmt) {
 }
 
 func InsertMetric(stmt *sql.Stmt, result models.ServiceResult, metric models.Metric) {
-	fmt.Println("inserting metric", result.Id, "called", metric.Name, "updated", result.Updated);
-
 	_, err := stmt.Exec(result.Updated, result.Id, result.Identifier, metric.Name, metric.Value, result.Updated, metric.Value)
 
 	if (err != nil) {
