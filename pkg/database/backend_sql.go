@@ -8,7 +8,7 @@ import (
 )
 
 func PrepareMetricInsert(dbMetrics *sql.DB) (*sql.Stmt) {
-	sql := "INSERT INTO service_metrics (extracted, updated, serviceCheckResultId, serviceIdentifier, name, value) VALUES (now(), ?, ?, ?, ?, ?)";
+	sql := "INSERT INTO service_metrics (extracted, updated, serviceCheckResultId, serviceIdentifier, name, value) VALUES (now(), ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE extracted = now(), updated = ?, value = ?";
 	stmt, err := dbMetrics.Prepare(sql);
 
 	if (err != nil) {
@@ -21,7 +21,7 @@ func PrepareMetricInsert(dbMetrics *sql.DB) (*sql.Stmt) {
 func InsertMetric(stmt *sql.Stmt, result models.ServiceResult, metric models.Metric) {
 	fmt.Println("inserting metric", result.Id, "called", metric.Name, "updated", result.Updated);
 
-	_, err := stmt.Exec(result.Updated, result.Id, result.Identifier, metric.Name, metric.Value)
+	_, err := stmt.Exec(result.Updated, result.Id, result.Identifier, metric.Name, metric.Value, result.Updated, metric.Value)
 
 	if (err != nil) {
 		panic(err);
