@@ -11,8 +11,3 @@ type ServiceResult struct {
 	Identifier string
 	Updated    string
 }
-
-type MetricToGenerate struct {
-	Service string
-	Metrics []string
-}
